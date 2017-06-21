@@ -58,8 +58,7 @@ See the [examples](examples) folder for more details.
 
 ## Documentation
 
-TODO: Describe `Ethernetbonjour`
-
+More information online at GitHub [https://github.com/moflo/EthernetBonjourParticle](https://github.com/moflo/EthernetBonjourParticle)
 
 
 ## LICENSE
