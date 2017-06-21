@@ -1,4 +1,4 @@
-#include <EthernetBonjourClass.h>
+#include <EthernetBonjour.h>
 
 
 // Create a UDP service for use by MDNS
@@ -8,7 +8,7 @@ UDP udp;
 TCPServer server = TCPServer(80);
 
 // Create a EthernetBonjour service for MDNS registration & discovery
-EthernetBonjourClass EthernetBonjour;
+EthernetBonjourClass Bonjour;
 
 
 void setup() {
@@ -22,13 +22,13 @@ void setup() {
   server.begin();
 
   // Initialize EthernetBonjour service with local UDP reference
-  EthernetBonjour.setUDP( &udp );
+  Bonjour.setUDP( &udp );
   
   // Begin MDNS registration servcie with the name of the HAP accessory (will appear in Apple Home)
-  EthernetBonjour.begin("particle");
+  Bonjour.begin("particle");
 
   // Start MDNS registration with TCP based service, using special HAP TXT records encoded as c-string
-  EthernetBonjour.addServiceRecord("particle._hap",
+  Bonjour.addServiceRecord("particle._hap",
                                    80,
                                    MDNSServiceTCP,
                                    "\x4sf=1\x14id=3C:33:1B:21:B3:00\x6pv=1.0\x04\c#=1\x04s#=1\x4\ff=0\x04sf=1\x0Bmd=particle");
@@ -39,7 +39,7 @@ void setup() {
 void loop() {
 
   // Process MDNS UDP traffic once per loop
-  EthernetBonjour.run();
+  Bonjour.run();
   
   // Check on TCP client status
   TCPClient client = server.available();
